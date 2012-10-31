@@ -8,12 +8,9 @@ import com.example.androidihungry.R;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
 import com.readystatesoftware.maps.*;
 
-import edu.jhu.cs.oose.project.group14.ihungry.androidapp.*;
 import edu.jhu.cs.oose.project.group14.ihungry.androidapp.MyLocation.*;
 import edu.jhu.cs.oose.project.group14.ihungry.androidclientmodel.*;
 
@@ -107,7 +104,7 @@ public class NearbyActivity extends MapActivity {
 			@Override
 			public void gotLocation(Location location) {
 				// Got the location!
-				getLocationInfo(location);
+				getLocationInfo(location); // display log
 				setCurrentLocation(location);
 				animateToCurrentLocation();
 
@@ -132,8 +129,8 @@ public class NearbyActivity extends MapActivity {
 
 		/* ############ Connect server ############ */
 		AndroidClientModel clientmodel = new AndroidClientModelImpl();
-		String responseSvr = clientmodel.getResponseFromServerT();
-		Log.v("[Response]", responseSvr);
+/**///		String responseSvr = clientmodel.getResponseFromServerT();
+/**///		Log.v("[Response]", responseSvr);
 
 		/* ############ Add some restaurant locations on map ############ */
 		// for (int i = 0; i < restaurant_info.length; i++) {
@@ -293,7 +290,7 @@ public class NearbyActivity extends MapActivity {
 		Log.v("LOCATION CHANGED", location.getLatitude() + "");
 		Log.v("LOCATION CHANGED", location.getLongitude() + "");
 
-		DisplayToastOnScr(location.getLatitude() + "" + location.getLongitude());
+	//	DisplayToastOnScr(location.getLatitude() + "" + location.getLongitude());
 
 	}
 

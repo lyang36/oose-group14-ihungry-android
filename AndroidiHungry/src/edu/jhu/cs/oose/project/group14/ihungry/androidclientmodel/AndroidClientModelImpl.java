@@ -18,7 +18,7 @@ import edu.jhu.cs.oose.fall2012.group14.ihungry.internet.*;
  *
  */
 public class AndroidClientModelImpl implements AndroidClientModel {
-
+	static private final int CONNECTIONTIMEOUT = 5000;
 	private InternetClient internetClient;
 
 	public AndroidClientModelImpl() {
@@ -38,7 +38,7 @@ public class AndroidClientModelImpl implements AndroidClientModel {
 
 		String responseFromServer = "";
 		try {
-			responseFromServer = internetClient.sendAndGet(a, 30000);
+			responseFromServer = internetClient.sendAndGet(a, CONNECTIONTIMEOUT);
 			
 			if(CommunicationProtocol.getRequestFromReceivedStr( responseFromServer ).equals(CommunicationProtocol.NO_SUCH_COMMAND)){
 				Log.v("[Message]","No Such Command");
