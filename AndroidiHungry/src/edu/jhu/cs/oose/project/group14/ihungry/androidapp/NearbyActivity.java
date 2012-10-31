@@ -24,9 +24,11 @@ import android.view.View.*;
 import android.widget.*;
 
 /**
- * This is the view that shows the map with current location and restaurants around.
+ * This is the view that shows the map with current location and restaurants
+ * around.
+ * 
  * @author SuNFloWer
- *
+ * 
  */
 public class NearbyActivity extends MapActivity {
 	static final private int ZOOMTIME = 15;
@@ -129,8 +131,8 @@ public class NearbyActivity extends MapActivity {
 
 		/* ############ Connect server ############ */
 		AndroidClientModel clientmodel = new AndroidClientModelImpl();
-/**///		String responseSvr = clientmodel.getResponseFromServerT();
-/**///		Log.v("[Response]", responseSvr);
+		String responseSvr = clientmodel.getResponseFromServerT();
+		Log.v("[Response]", responseSvr);
 
 		/* ############ Add some restaurant locations on map ############ */
 		// for (int i = 0; i < restaurant_info.length; i++) {
@@ -156,29 +158,44 @@ public class NearbyActivity extends MapActivity {
 	 * 
 	 */
 	private class NetworkSearchAddressTask extends
-			AsyncTask<String[], Void, String> {
+			AsyncTask<String[], MyOverlayItem, String> {
 
 		@Override
 		protected String doInBackground(String[]... rest_info) {
-			for (int i = 0; i < rest_info.length; i++) {
-				overlayitem2 = getLocationByAddress(geocoder, rest_info[i][2],
-						i + 1, rest_info[i][1], rest_info[i][0]);
-				overlayitem2_multi.add(overlayitem2);
+			try {
+				for (int i = 0; i < rest_info.length; i++) {
+					overlayitem2 = getLocationByAddress(geocoder,
+							rest_info[i][2], i + 1, rest_info[i][1],
+							rest_info[i][0]);
+					if(overlayitem2 != null) {
+						overlayitem2_multi.add(overlayitem2);
+						publishProgress(overlayitem2);
+					}
+				}
+			} catch (Exception e) {
+				Log.e("[doInBackground]", "Error");
 			}
-			for (int i = 0; i < overlayitem2_multi.size(); i++) {
+
+		/*	for (int i = 0; i < overlayitem2_multi.size(); i++) {
 				MyOverlayItem overlayitem_one = overlayitem2_multi.get(i);
 				Log.i("[Map Items]",
 						overlayitem_one.getRestaurantID() + " "
 								+ overlayitem_one.getTitle() + " "
 								+ overlayitem_one.getPoint());
 			}
-
+		*/
 			return "Done Searching";
 		}
-
+		
+		@Override
+		protected void onProgressUpdate(MyOverlayItem... item) {
+			addsingleOverlayitemToMap(item[0]);
+		}
+		
+		@Override
 		protected void onPostExecute(String result) {
 			Log.i("[on Progress Execute]", "Called " + result);
-			addOverlayitemsToMap(overlayitem2_multi);
+		//	addOverlayitemsToMap(overlayitem2_multi);
 		}
 
 	}
@@ -215,15 +232,15 @@ public class NearbyActivity extends MapActivity {
 						restaurantID);
 			}
 		} catch (Exception e) {
-			Log.e("[Search Error]", "ERROR!!!");
+			Log.e("[getLocationByAddress]", "Search Error!!!");
 			// e.printStackTrace();
 		}
 		return null;
 	}
 
-	
 	/**
-	 * Add all the overlay items in the arraylist onto the map.
+	 * Add all the overlay items in the arraylist onto the map, specifically, itemizedoverlay2.
+	 * 
 	 * @param overlayitems
 	 */
 	private void addOverlayitemsToMap(ArrayList<MyOverlayItem> overlayitems) {
@@ -233,6 +250,18 @@ public class NearbyActivity extends MapActivity {
 			mapOverlays.add(itemizedoverlay2);
 			mapView.postInvalidate();
 		}
+	}
+	
+	/**
+	 * Add a single overlay item to the map, specifically, itemizedoverlay2.
+	 * @param item_2
+	 */
+	private void addsingleOverlayitemToMap(MyOverlayItem item_2){
+		itemizedoverlay2.addOverlay(item_2);
+		mapOverlays.add(itemizedoverlay2);
+		mapView.postInvalidate();
+		
+		
 	}
 
 	OnClickListener imgbtn_refresh_Listener = new OnClickListener() {
@@ -269,6 +298,7 @@ public class NearbyActivity extends MapActivity {
 
 	/**
 	 * Set the currentPoint and currentLocation given the input location.
+	 * 
 	 * @param location
 	 */
 	private void setCurrentLocation(Location location) {
@@ -290,7 +320,8 @@ public class NearbyActivity extends MapActivity {
 		Log.v("LOCATION CHANGED", location.getLatitude() + "");
 		Log.v("LOCATION CHANGED", location.getLongitude() + "");
 
-	//	DisplayToastOnScr(location.getLatitude() + "" + location.getLongitude());
+		// DisplayToastOnScr(location.getLatitude() + "" +
+		// location.getLongitude());
 
 	}
 
@@ -319,6 +350,7 @@ public class NearbyActivity extends MapActivity {
 
 	/**
 	 * Display toast on screen.
+	 * 
 	 * @param str
 	 */
 	private void DisplayToastOnScr(String str) {
