@@ -18,19 +18,20 @@ public final class R {
         public static final int balloon_overlay_unfocused=0x7f020004;
         public static final int blue_pin=0x7f020005;
         public static final int favouriteicon=0x7f020006;
-        public static final int gradient_bg=0x7f020007;
-        public static final int gradient_bg_hover=0x7f020008;
-        public static final int ic_action_search=0x7f020009;
-        public static final int ic_launcher=0x7f02000a;
-        public static final int image_bg=0x7f02000b;
-        public static final int list_disclosure=0x7f02000c;
-        public static final int list_selector=0x7f02000d;
-        public static final int marker=0x7f02000e;
-        public static final int me_icon=0x7f02000f;
-        public static final int mylocationicon=0x7f020010;
-        public static final int nearbyicon=0x7f020011;
-        public static final int orderhistoryicon=0x7f020012;
-        public static final int refresh=0x7f020013;
+        public static final int food_icon=0x7f020007;
+        public static final int gradient_bg=0x7f020008;
+        public static final int gradient_bg_hover=0x7f020009;
+        public static final int ic_action_search=0x7f02000a;
+        public static final int ic_launcher=0x7f02000b;
+        public static final int image_bg=0x7f02000c;
+        public static final int list_disclosure=0x7f02000d;
+        public static final int list_selector=0x7f02000e;
+        public static final int marker=0x7f02000f;
+        public static final int me_icon=0x7f020010;
+        public static final int mylocationicon=0x7f020011;
+        public static final int nearbyicon=0x7f020012;
+        public static final int orderhistoryicon=0x7f020013;
+        public static final int refresh=0x7f020014;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f040013;
@@ -42,6 +43,7 @@ public final class R {
         public static final int balloon_item_title=0x7f04001b;
         public static final int balloon_main_layout=0x7f04001a;
         public static final int bt_reviewItem=0x7f040019;
+        public static final int btn_quantity=0x7f040023;
         public static final int button1=0x7f04000d;
         public static final int button2=0x7f04000e;
         public static final int duration=0x7f040022;
@@ -55,7 +57,7 @@ public final class R {
         public static final int list=0x7f040018;
         public static final int list_image=0x7f04001f;
         public static final int mapview=0x7f040014;
-        public static final int menu_settings=0x7f040023;
+        public static final int menu_settings=0x7f040024;
         public static final int textView1=0x7f04000a;
         public static final int textView2=0x7f040004;
         public static final int textView3=0x7f040005;

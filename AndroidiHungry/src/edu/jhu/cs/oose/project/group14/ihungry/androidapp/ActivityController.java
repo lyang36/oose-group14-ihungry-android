@@ -31,63 +31,14 @@ public class ActivityController extends Activity {
 		 * If have username and pwd , then auto fill the blank Otherwise, leave
 		 * the blank empty (User will prompt to sign up)
 		 */
-		saveFile(
-				"info.txt",
+		FileHandler.saveFile( this,
+				FileHandler.f_userinfo,
 				"szhao12||12345||Shang Zhao||Male||911-911-9119||Johns Hopkins University, Baltimore, MD, 21218");
 
 		// Load the first Screen / Activity
 		intent_i = new Intent(getApplicationContext(), LoginActivity.class);
 		startActivityForResult(intent_i, ActivitySwitchSignals.LOGIN);
 
-	}
-
-	/**
-	 * Save input string into a file and store in internal storage in Android
-	 * 
-	 * @param fileName
-	 * @param str
-	 * @return
-	 */
-	private boolean saveFile(String fileName, String str) {
-		boolean saveSucceed = false;
-		try {
-			FileOutputStream outStream = this.openFileOutput(fileName,
-					Context.MODE_PRIVATE);
-			outStream.write(str.getBytes());
-			outStream.close();
-			DisplayToastOnScr("Saved");
-			saveSucceed = true;
-		} catch (Exception e) {
-			Log.v("[Exception]", "Error saving file");
-		}
-		return saveSucceed;
-	}
-
-	/**
-	 * Read content according to the file name from the internal storage from
-	 * Android
-	 * 
-	 * @param fileName
-	 * @return
-	 */
-	private String loadFile(String fileName) {
-		String readStr = null;
-		try {
-			FileInputStream inStream = this.openFileInput(fileName);
-			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			byte[] buffer = new byte[1024];
-			int length = -1;
-			while ((length = inStream.read(buffer)) != -1) {
-				stream.write(buffer, 0, length);
-			}
-			stream.close();
-			inStream.close();
-			readStr = stream.toString();
-			DisplayToastOnScr("Loaded " + readStr);
-		} catch (Exception e) {
-			Log.v("[Exception]", "Error reading file");
-		}
-		return readStr;
 	}
 
 	/**
@@ -169,14 +120,6 @@ public class ActivityController extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_controller, menu);
 		return true;
-	}
-
-	/**
-	 * Display toast on screen.
-	 * @param str
-	 */
-	private void DisplayToastOnScr(String str) {
-		Toast.makeText(ActivityController.this, str, Toast.LENGTH_SHORT).show();
 	}
 
 }

@@ -1,11 +1,6 @@
 package edu.jhu.cs.oose.project.group14.ihungry.androidapp;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-
 import com.example.androidihungry.R;
-import com.example.androidihungry.R.layout;
-import com.example.androidihungry.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -35,7 +30,7 @@ public class AboutmeActivity extends Activity {
 		text_phone = (TextView) this.findViewById(R.id.txv_phone);
 		text_address = (TextView) this.findViewById(R.id.txv_address);
 
-		String readStoredInfo = loadFile("info.txt");
+		String readStoredInfo = FileHandler.loadFile(this, FileHandler.f_userinfo);
 		if (!readStoredInfo.equals(null)) {
 			String delims = "[|]+";
 			String[] tokens = readStoredInfo.split(delims);
@@ -52,33 +47,6 @@ public class AboutmeActivity extends Activity {
 					.setText(tokens[5]);
 		}
 
-	}
-
-	/**
-	 * Read content according to the file name from the internal storage from
-	 * Android
-	 * 
-	 * @param fileName
-	 * @return
-	 */
-	private String loadFile(String fileName) {
-		String readStr = null;
-		try {
-			FileInputStream inStream = this.openFileInput(fileName);
-			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			byte[] buffer = new byte[1024];
-			int length = -1;
-			while ((length = inStream.read(buffer)) != -1) {
-				stream.write(buffer, 0, length);
-			}
-			stream.close();
-			inStream.close();
-			readStr = stream.toString();
-			DisplayToastOnScr("Loaded " + readStr);
-		} catch (Exception e) {
-			Log.v("[Exception]", "Error reading file");
-		}
-		return readStr;
 	}
 
 	@Override
@@ -99,11 +67,4 @@ public class AboutmeActivity extends Activity {
 		return super.onKeyDown(keyCode, event);
 	}
 
-	/**
-	 * Display toast on screen.
-	 * @param str
-	 */
-	private void DisplayToastOnScr(String str) {
-		Toast.makeText(AboutmeActivity.this, str, Toast.LENGTH_SHORT).show();
-	}
 }

@@ -2,7 +2,6 @@ package edu.jhu.cs.oose.project.group14.ihungry.androidapp;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import com.example.androidihungry.R;
 import com.google.android.maps.GeoPoint;
@@ -47,6 +46,12 @@ public class NearbyActivity extends MapActivity {
 					"3327 St. Paul St, Baltimore, MD 21218" },
 			{ "r1007", "Thai Restaurant",
 					"3316 Greenmount Ave, Baltimore, MD 21218" } };
+
+	static final private int[][] restaurant_locations = {
+			{ 39337482, -76634559 }, { 39337249, -76624322 },
+			{ 39344429, -76631478 }, { 39334798, -76620687 },
+			{ 39313321, -76617787 }, { 39330855, -76633269 },
+			{ 39329058, -76615716 }, { 39328962, -76609548 } };
 
 	private TapControlledMapView mapView;
 	private MapController mapController;
@@ -127,7 +132,7 @@ public class NearbyActivity extends MapActivity {
 		myLocation.getLocation(this, locationResult);
 
 		/* ############ Geocoder ############ */
-		geocoder = new Geocoder(this, Locale.US);
+		geocoder = new Geocoder(this);
 
 		/* ############ Connect server ############ */
 		AndroidClientModel clientmodel = new AndroidClientModelImpl();
@@ -165,9 +170,9 @@ public class NearbyActivity extends MapActivity {
 			try {
 				for (int i = 0; i < rest_info.length; i++) {
 					overlayitem2 = getLocationByAddress(geocoder,
-							rest_info[i][2], i + 1, rest_info[i][1],
+							rest_info[i][2], i, rest_info[i][1],
 							rest_info[i][0]);
-					if(overlayitem2 != null) {
+					if (overlayitem2 != null) {
 						overlayitem2_multi.add(overlayitem2);
 						publishProgress(overlayitem2);
 					}
@@ -176,26 +181,24 @@ public class NearbyActivity extends MapActivity {
 				Log.e("[doInBackground]", "Error");
 			}
 
-		/*	for (int i = 0; i < overlayitem2_multi.size(); i++) {
-				MyOverlayItem overlayitem_one = overlayitem2_multi.get(i);
-				Log.i("[Map Items]",
-						overlayitem_one.getRestaurantID() + " "
-								+ overlayitem_one.getTitle() + " "
-								+ overlayitem_one.getPoint());
-			}
-		*/
+			/*
+			 * for (int i = 0; i < overlayitem2_multi.size(); i++) {
+			 * MyOverlayItem overlayitem_one = overlayitem2_multi.get(i);
+			 * Log.i("[Map Items]", overlayitem_one.getRestaurantID() + " " +
+			 * overlayitem_one.getTitle() + " " + overlayitem_one.getPoint()); }
+			 */
 			return "Done Searching";
 		}
-		
+
 		@Override
 		protected void onProgressUpdate(MyOverlayItem... item) {
 			addsingleOverlayitemToMap(item[0]);
 		}
-		
+
 		@Override
 		protected void onPostExecute(String result) {
 			Log.i("[on Progress Execute]", "Called " + result);
-		//	addOverlayitemsToMap(overlayitem2_multi);
+			// addOverlayitemsToMap(overlayitem2_multi);
 		}
 
 	}
@@ -213,33 +216,64 @@ public class NearbyActivity extends MapActivity {
 	public MyOverlayItem getLocationByAddress(Geocoder geocoder,
 			String locationName, int index, String restaurantName,
 			String restaurantID) {
-		/* Better not put Toast display in try catch block */
-		try {
-			List<Address> addressList = geocoder.getFromLocationName(
-					locationName, 1);
-			Log.v("[Search address]", locationName);
-			if (addressList != null && addressList.size() > 0) {
-				int lat = (int) (addressList.get(0).getLatitude() * 1e6);
-				int lng = (int) (addressList.get(0).getLongitude() * 1e6);
+		Log.v("[Search address]", locationName);
 
-				Log.i("[Search Result]", "lat: "
-						+ addressList.get(0).getLatitude() + " lng: "
-						+ addressList.get(0).getLongitude());
-
-				GeoPoint pt = new GeoPoint(lat, lng);
-
+//		Log.v("[Cache]", FileHandler.loadFile(this, FileHandler.f_rest_location_cache));
+		/* Check if in the cache */
+		if (locationInCache(locationName)) {
+			// return;
+		} else {
+		//	GeoPoint pt = getLocationByGeocoder(locationName);
+			GeoPoint pt = new GeoPoint(restaurant_locations[index][0], restaurant_locations[index][1]);
+			if (pt != null)
 				return new MyOverlayItem(pt, restaurantName, locationName,
 						restaurantID);
-			}
-		} catch (Exception e) {
-			Log.e("[getLocationByAddress]", "Search Error!!!");
-			// e.printStackTrace();
+			else
+				return null;
 		}
 		return null;
 	}
 
 	/**
-	 * Add all the overlay items in the arraylist onto the map, specifically, itemizedoverlay2.
+	 * Use Geocoder to get the GeoPoint according to the street address of the restaurant.
+	 * @param locationName
+	 * @return
+	 */
+	private GeoPoint getLocationByGeocoder(String locationName) {
+		/* Better not put Toast display in try catch block */
+		try {
+			// Log.v("[Geocoder enabled]",geocoder.isPresent()+""); // API 9
+			// above
+			List<Address> addressList = geocoder.getFromLocationName(
+					locationName, 1);
+			if (addressList != null && addressList.size() > 0) {
+				int lat = (int) (addressList.get(0).getLatitude() * 1e6);
+				int lng = (int) (addressList.get(0).getLongitude() * 1e6);
+
+				Log.v("[Search Result]", "lat: " + lat + " lng: " + lng);
+
+				/* Write to cache */
+				FileHandler.saveFile(this, FileHandler.f_rest_location_cache,
+						locationName + "||" + lat + " " + lng + "\n");
+
+				GeoPoint pt = new GeoPoint(lat, lng);
+				return pt;
+			}
+		} catch (Exception e) {
+			Log.e("[getLocationByAddress]", "Search Error!!!");
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private boolean locationInCache(String locationName) {
+
+		return false;
+	}
+
+	/**
+	 * Add all the overlay items in the arraylist onto the map, specifically,
+	 * itemizedoverlay2.
 	 * 
 	 * @param overlayitems
 	 */
@@ -251,17 +285,17 @@ public class NearbyActivity extends MapActivity {
 			mapView.postInvalidate();
 		}
 	}
-	
+
 	/**
 	 * Add a single overlay item to the map, specifically, itemizedoverlay2.
+	 * 
 	 * @param item_2
 	 */
-	private void addsingleOverlayitemToMap(MyOverlayItem item_2){
+	private void addsingleOverlayitemToMap(MyOverlayItem item_2) {
 		itemizedoverlay2.addOverlay(item_2);
 		mapOverlays.add(itemizedoverlay2);
 		mapView.postInvalidate();
-		
-		
+
 	}
 
 	OnClickListener imgbtn_refresh_Listener = new OnClickListener() {
@@ -320,7 +354,7 @@ public class NearbyActivity extends MapActivity {
 		Log.v("LOCATION CHANGED", location.getLatitude() + "");
 		Log.v("LOCATION CHANGED", location.getLongitude() + "");
 
-		// DisplayToastOnScr(location.getLatitude() + "" +
+		// ToastDisplay.DisplayToastOnScr(this, location.getLatitude() + "" +
 		// location.getLongitude());
 
 	}
@@ -344,17 +378,7 @@ public class NearbyActivity extends MapActivity {
 
 	@Override
 	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
 		return false;
-	}
-
-	/**
-	 * Display toast on screen.
-	 * 
-	 * @param str
-	 */
-	private void DisplayToastOnScr(String str) {
-		Toast.makeText(NearbyActivity.this, str, Toast.LENGTH_SHORT).show();
 	}
 
 }

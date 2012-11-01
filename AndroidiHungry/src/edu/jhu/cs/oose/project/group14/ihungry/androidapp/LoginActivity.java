@@ -1,13 +1,6 @@
 package edu.jhu.cs.oose.project.group14.ihungry.androidapp;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-
-import sun.org.mozilla.javascript.internal.Token;
-
 import com.example.androidihungry.R;
-import com.example.androidihungry.R.layout;
-import com.example.androidihungry.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -41,7 +34,7 @@ public class LoginActivity extends Activity {
         //et_username.setHint("Please enter username");
         //et_pwd.setHint("Please enter password");
        
-		String readStoredInfo = loadFile("info.txt");
+		String readStoredInfo = FileHandler.loadFile(this, "info.txt");
 		if(!readStoredInfo.equals(null)){
 			String delims = "[|]+";
 			String[] tokens = readStoredInfo.split(delims);
@@ -72,11 +65,11 @@ public class LoginActivity extends Activity {
 	OnClickListener btn_Login_Listener = new OnClickListener() {
 		public void onClick(View v) {
 			if(et_username.getText().toString().equals(username_stored) && et_pwd.getText().toString().equals(pwd_stored)){
-				DisplayToastOnScr("Login Successfully");				
+				ToastDisplay.DisplayToastOnScr(LoginActivity.this, "Login Successfully");				
 				setResult(ActivitySwitchSignals.MAINSCREENSWH);
 				finish();
 			} else{
-				DisplayToastOnScr("Login Failed");				
+				ToastDisplay.DisplayToastOnScr(LoginActivity.this, "Login Failed");		
 				
 			}
 			
@@ -93,34 +86,6 @@ public class LoginActivity extends Activity {
 
 		}
 	};
-    
-    
-    
-    /**
-	 * Read content according to the file name from the internal storage from Android
-	 * @param fileName
-	 * @return
-	 */
-	private String loadFile(String fileName)
-	{
-		String readStr = null;
-	    try {
-	        FileInputStream inStream=this.openFileInput(fileName);
-	        ByteArrayOutputStream stream=new ByteArrayOutputStream();
-	        byte[] buffer=new byte[1024];
-	        int length=-1;
-	        while((length=inStream.read(buffer))!=-1)   {
-	            stream.write(buffer,0,length);
-	        }
-	        stream.close();
-	        inStream.close();
-	        readStr = stream.toString();
-	        DisplayToastOnScr("Loaded "+readStr);
-	    }  catch (Exception e){
-	    	Log.v("[Exception]","Error reading file");
-	    }  
-	    return readStr;
-	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -139,12 +104,5 @@ public class LoginActivity extends Activity {
 
 		return super.onKeyDown(keyCode, event);
 	}
-    
-    /**
-     * Display toast on screen.
-     * @param str
-     */
-    private void DisplayToastOnScr(String str) {
-		Toast.makeText(LoginActivity.this, str, Toast.LENGTH_SHORT).show();
-	}
+ 
 }
