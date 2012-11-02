@@ -35,7 +35,6 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f040013;
-        public static final int artist=0x7f040021;
         public static final int balloon_close=0x7f040001;
         public static final int balloon_disclosure=0x7f04001d;
         public static final int balloon_inner_layout=0x7f040000;
@@ -46,7 +45,6 @@ public final class R {
         public static final int btn_quantity=0x7f040023;
         public static final int button1=0x7f04000d;
         public static final int button2=0x7f04000e;
-        public static final int duration=0x7f040022;
         public static final int editText1=0x7f04000b;
         public static final int editText2=0x7f04000c;
         public static final int imgbtn_Aboutme=0x7f040010;
@@ -58,6 +56,8 @@ public final class R {
         public static final int list_image=0x7f04001f;
         public static final int mapview=0x7f040014;
         public static final int menu_settings=0x7f040024;
+        public static final int price=0x7f040022;
+        public static final int rating=0x7f040021;
         public static final int textView1=0x7f04000a;
         public static final int textView2=0x7f040004;
         public static final int textView3=0x7f040005;

@@ -1,5 +1,7 @@
 package edu.jhu.cs.oose.project.group14.ihungry.androidapp;
 
+import java.util.ArrayList;
+
 import com.example.androidihungry.R;
 import com.example.androidihungry.R.layout;
 import com.example.androidihungry.R.menu;
@@ -7,9 +9,12 @@ import com.example.androidihungry.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.View;
 import android.widget.*;
+import android.widget.AdapterView.OnItemClickListener;
 
 /**
  * This activity shows the detailed information about the specific restaurant
@@ -41,6 +46,8 @@ public class OrderandRestaurantInfoActivity extends Activity {
 	private TextView tv_rest_addr;
 
 	private ListView m_ListView;
+	
+	private MyListViewAdapter list_adapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,10 +70,65 @@ public class OrderandRestaurantInfoActivity extends Activity {
 		tv_rest_addr.setText(rest_addr);
 
 		m_ListView = (ListView) findViewById(R.id.list);
-		m_ListView.setAdapter(new ArrayAdapter<String>(this,
-				R.layout.list_item_simple, R.id.title, menu_info2));
+//		m_ListView.setAdapter(new ArrayAdapter<String>(this,R.layout.list_item_simple, R.id.title, menu_info2));
+//		list_adapter = new MyListViewAdapter(this, menu_info2);
+		
+		ListMenuItem item1 = new ListMenuItem("Chicken with Broccoli", 4.0, 4.5);
+		ListMenuItem item2 = new ListMenuItem("Assorted Mixed Vegetable", 4.4, 4.65);
+		ListMenuItem item3 = new ListMenuItem("Shrimp with Lobster Sauce", 4.3, 4.95);
+		ListMenuItem item4 = new ListMenuItem("Chicken with Cashew Nuts", 4.1, 5.05);
+		ListMenuItem item5 = new ListMenuItem("B-B-Q Spare Ribs", 3.95, 5.25);
+		ListMenuItem item6 = new ListMenuItem("Skewered Beef", 4.8, 4.5);
+		ListMenuItem item7 = new ListMenuItem("Wonton Soup", 4.5, 1.5);
+		ListMenuItem item8 = new ListMenuItem("House Special Soup", 4.7, 5.50);
+		ArrayList<ListMenuItem> menu_t = new ArrayList<ListMenuItem>();
+		menu_t.add(item1);
+		menu_t.add(item2);
+		menu_t.add(item3);
+		menu_t.add(item4);
+		menu_t.add(item5);
+		menu_t.add(item6);
+		menu_t.add(item7);
+		menu_t.add(item8);
+
+		
+		
+		list_adapter = new MyListViewAdapter(this, menu_t);
+		m_ListView.setAdapter(list_adapter);
+		
+		// Click event for single list row
+		m_ListView.setOnItemClickListener(m_ListViewOnItemClickListener);
 
 	}
+	
+	/**
+	 * A call-back for when the user tap on a single row of the list.
+	*/
+	OnItemClickListener m_ListViewOnItemClickListener = new OnItemClickListener(){
+
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			
+			ListMenuItem clickItem = (ListMenuItem) list_adapter.getItem(position);
+			clickItem.setPrice(999);
+			list_adapter.notifyDataSetChanged();
+			
+			
+			
+	/*		
+		//	((ImageButton) findViewById(R.id.imgbtn_Orderhistory)).setOnClickListener(imgbtn_Orderhistory_Listener);
+			Button btn_quantity = (Button) view.findViewById(R.id.btn_quantity);
+			Log.v("[List View Click Event]",position+" "+btn_quantity.getText().toString());
+			
+			TextView tv_price = list_adapter.getPriceView(position);
+		//	TextView tv_price = (TextView)view.findViewById(R.id.price);
+			tv_price.setText("1111");
+			
+			list_adapter.notifyDataSetChanged();
+	*/
+		}
+		
+	}; 
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

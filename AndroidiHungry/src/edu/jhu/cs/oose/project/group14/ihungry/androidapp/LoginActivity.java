@@ -34,7 +34,7 @@ public class LoginActivity extends Activity {
         //et_username.setHint("Please enter username");
         //et_pwd.setHint("Please enter password");
        
-		String readStoredInfo = FileHandler.loadFile(this, "info.txt");
+		String readStoredInfo = FileHandler.loadFile(this, FileHandler.f_userinfo);
 		if(!readStoredInfo.equals(null)){
 			String delims = "[|]+";
 			String[] tokens = readStoredInfo.split(delims);

@@ -47,7 +47,7 @@
  	-->
     <!-- Rating -->
     <TextView
-        android:id="@+id/artist"
+        android:id="@+id/rating"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/thumbnail"
@@ -58,7 +58,7 @@
 
     <!-- Item Price -->
     <TextView
-        android:id="@+id/duration"
+        android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/title"
@@ -76,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:focusable="false"
         android:text="0" />
 
 </RelativeLayout>
