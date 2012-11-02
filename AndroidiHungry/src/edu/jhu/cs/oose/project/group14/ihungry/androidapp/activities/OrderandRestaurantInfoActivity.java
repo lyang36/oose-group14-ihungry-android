@@ -1,10 +1,14 @@
-package edu.jhu.cs.oose.project.group14.ihungry.androidapp;
+package edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities;
 
 import java.util.ArrayList;
 
 import com.example.androidihungry.R;
 import com.example.androidihungry.R.layout;
 import com.example.androidihungry.R.menu;
+
+import edu.jhu.cs.oose.project.group14.ihungry.androidapp.ActivitySwitchSignals;
+import edu.jhu.cs.oose.project.group14.ihungry.androidapp.ListMenuItem;
+import edu.jhu.cs.oose.project.group14.ihungry.androidapp.MyListViewAdapter;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -13,6 +17,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -46,7 +51,7 @@ public class OrderandRestaurantInfoActivity extends Activity {
 	private TextView tv_rest_addr;
 
 	private ListView m_ListView;
-	
+
 	private MyListViewAdapter list_adapter;
 	private ArrayList<ListMenuItem> menu_t;
 
@@ -71,17 +76,24 @@ public class OrderandRestaurantInfoActivity extends Activity {
 		tv_rest_addr.setText(rest_addr);
 
 		m_ListView = (ListView) findViewById(R.id.list);
-//		m_ListView.setAdapter(new ArrayAdapter<String>(this,R.layout.list_item_simple, R.id.title, menu_info2));
-//		list_adapter = new MyListViewAdapter(this, menu_info2);
-		
-		ListMenuItem item1 = new ListMenuItem("Chicken with Broccoli", 4.0, 4.5, 0);
-		ListMenuItem item2 = new ListMenuItem("Assorted Mixed Vegetable", 4.4, 4.65, 0);
-		ListMenuItem item3 = new ListMenuItem("Shrimp with Lobster Sauce", 4.3, 4.95, 0);
-		ListMenuItem item4 = new ListMenuItem("Chicken with Cashew Nuts", 4.1, 5.05, 0);
+		// m_ListView.setAdapter(new
+		// ArrayAdapter<String>(this,R.layout.list_item_simple, R.id.title,
+		// menu_info2));
+		// list_adapter = new MyListViewAdapter(this, menu_info2);
+
+		ListMenuItem item1 = new ListMenuItem("Chicken with Broccoli", 4.0,
+				4.5, 0);
+		ListMenuItem item2 = new ListMenuItem("Assorted Mixed Vegetable", 4.4,
+				4.65, 0);
+		ListMenuItem item3 = new ListMenuItem("Shrimp with Lobster Sauce", 4.3,
+				4.95, 0);
+		ListMenuItem item4 = new ListMenuItem("Chicken with Cashew Nuts", 4.1,
+				5.05, 0);
 		ListMenuItem item5 = new ListMenuItem("B-B-Q Spare Ribs", 3.95, 5.25, 0);
 		ListMenuItem item6 = new ListMenuItem("Skewered Beef", 4.8, 4.5, 0);
 		ListMenuItem item7 = new ListMenuItem("Wonton Soup", 4.5, 1.5, 0);
-		ListMenuItem item8 = new ListMenuItem("House Special Soup", 4.7, 5.50, 0);
+		ListMenuItem item8 = new ListMenuItem("House Special Soup", 4.7, 5.50,
+				0);
 		menu_t = new ArrayList<ListMenuItem>();
 		menu_t.add(item1);
 		menu_t.add(item2);
@@ -92,47 +104,60 @@ public class OrderandRestaurantInfoActivity extends Activity {
 		menu_t.add(item7);
 		menu_t.add(item8);
 
-		
-		
 		list_adapter = new MyListViewAdapter(this, menu_t);
 		m_ListView.setAdapter(list_adapter);
-		
+
 		// Click event for single list row
 		m_ListView.setOnItemClickListener(m_ListViewOnItemClickListener);
 
+		((Button) findViewById(R.id.bt_reviewItem))
+				.setOnClickListener(bt_reviewItem_Listener);
+
 	}
-	
+
+	OnClickListener bt_reviewItem_Listener = new OnClickListener() {
+		public void onClick(View v) {
+			for (int i = 0; i < menu_t.size(); i++) {
+				Log.v("[Item quantity]",
+						((ListMenuItem) menu_t.get(i)).getQuantity() + "");
+			}
+		//	finish();
+		
+		
+		
+		}
+	};
+
 	/**
 	 * A call-back for when the user tap on a single row of the list.
-	*/
-	OnItemClickListener m_ListViewOnItemClickListener = new OnItemClickListener(){
+	 */
+	OnItemClickListener m_ListViewOnItemClickListener = new OnItemClickListener() {
 
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			
-			ListMenuItem clickItem = (ListMenuItem) list_adapter.getItem(position);
-		//	clickItem.setPrice(999);
-		//	list_adapter.notifyDataSetChanged();
-			
-			for(int i=0; i<menu_t.size(); i++){
-				Log.v("[Item price]",((ListMenuItem)menu_t.get(i)).getQuantity()+"");
-			}
-			
-			
-	/*		
-		//	((ImageButton) findViewById(R.id.imgbtn_Orderhistory)).setOnClickListener(imgbtn_Orderhistory_Listener);
-			Button btn_quantity = (Button) view.findViewById(R.id.btn_quantity);
-			Log.v("[List View Click Event]",position+" "+btn_quantity.getText().toString());
-			
-			TextView tv_price = list_adapter.getPriceView(position);
-		//	TextView tv_price = (TextView)view.findViewById(R.id.price);
-			tv_price.setText("1111");
-			
-			list_adapter.notifyDataSetChanged();
-	*/
+
+			ListMenuItem clickItem = (ListMenuItem) list_adapter
+					.getItem(position);
+			// clickItem.setPrice(999);
+			// list_adapter.notifyDataSetChanged();
+
+			/*
+			 * // ((ImageButton)
+			 * findViewById(R.id.imgbtn_Orderhistory)).setOnClickListener
+			 * (imgbtn_Orderhistory_Listener); Button btn_quantity = (Button)
+			 * view.findViewById(R.id.btn_quantity);
+			 * Log.v("[List View Click Event]"
+			 * ,position+" "+btn_quantity.getText().toString());
+			 * 
+			 * TextView tv_price = list_adapter.getPriceView(position); //
+			 * TextView tv_price = (TextView)view.findViewById(R.id.price);
+			 * tv_price.setText("1111");
+			 * 
+			 * list_adapter.notifyDataSetChanged();
+			 */
 		}
-		
-	}; 
+
+	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

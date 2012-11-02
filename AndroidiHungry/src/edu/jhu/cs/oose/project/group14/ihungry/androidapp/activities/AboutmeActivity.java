@@ -1,6 +1,9 @@
-package edu.jhu.cs.oose.project.group14.ihungry.androidapp;
+package edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities;
 
 import com.example.androidihungry.R;
+
+import edu.jhu.cs.oose.project.group14.ihungry.androidapp.ActivitySwitchSignals;
+import edu.jhu.cs.oose.project.group14.ihungry.androidapp.FileHandler;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -10,9 +13,11 @@ import android.view.Menu;
 import android.widget.*;
 
 /**
- * The view that shows the personal information of the user including name, gender, phone #, address, etc.
+ * The view that shows the personal information of the user including name,
+ * gender, phone #, address, etc.
+ * 
  * @author SuNFloWer
- *
+ * 
  */
 public class AboutmeActivity extends Activity {
 	private TextView text_name;
@@ -30,7 +35,8 @@ public class AboutmeActivity extends Activity {
 		text_phone = (TextView) this.findViewById(R.id.txv_phone);
 		text_address = (TextView) this.findViewById(R.id.txv_address);
 
-		String readStoredInfo = FileHandler.loadFile(this, FileHandler.f_userinfo);
+		String readStoredInfo = FileHandler.loadFile(this,
+				FileHandler.f_userinfo);
 		if (!readStoredInfo.equals(null)) {
 			String delims = "[|]+";
 			String[] tokens = readStoredInfo.split(delims);
@@ -38,13 +44,12 @@ public class AboutmeActivity extends Activity {
 				Log.v("[About me]", tokens.length + " " + tokens[i]);
 
 			}
-			
+
 			text_name.setText(tokens[2]);
 
 			text_gender.setText(tokens[3]);
 			text_phone.setText(tokens[4]);
-			text_address
-					.setText(tokens[5]);
+			text_address.setText(tokens[5]);
 		}
 
 	}

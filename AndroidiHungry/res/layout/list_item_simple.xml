@@ -79,9 +79,10 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/rating"
         android:layout_centerVertical="true"
-        android:focusable="false"
         android:text="-" />
-
+    
+    <!--  android:focusable="false" -->
+    
     <Button
         android:id="@+id/btn_add"
         style="?android:attr/buttonStyleSmall"
@@ -90,7 +91,6 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="15dp"
         android:layout_toLeftOf="@+id/btn_minus"
-        android:focusable="false"
         android:text="+" />
 
     <TextView

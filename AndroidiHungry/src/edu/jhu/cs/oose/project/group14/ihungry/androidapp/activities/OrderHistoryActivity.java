@@ -1,6 +1,8 @@
-package edu.jhu.cs.oose.project.group14.ihungry.androidapp;
+package edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities;
 
 import com.example.androidihungry.R;
+
+import edu.jhu.cs.oose.project.group14.ihungry.androidapp.ActivitySwitchSignals;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.KeyEvent;

@@ -12,6 +12,8 @@ import com.google.android.maps.MapView;
 import com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay;
 import com.readystatesoftware.mapviewballoons.BalloonOverlayView;
 
+import edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities.OrderandRestaurantInfoActivity;;
+
 /**
  * This is an overlay class with customized overlay items on a mapview.
  * 

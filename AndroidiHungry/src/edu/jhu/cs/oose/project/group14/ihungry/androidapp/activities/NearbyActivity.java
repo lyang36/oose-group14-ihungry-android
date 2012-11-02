@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.project.group14.ihungry.androidapp;
+package edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,11 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.Overlay;
 import com.readystatesoftware.maps.*;
 
+import edu.jhu.cs.oose.project.group14.ihungry.androidapp.ActivitySwitchSignals;
+import edu.jhu.cs.oose.project.group14.ihungry.androidapp.FileHandler;
+import edu.jhu.cs.oose.project.group14.ihungry.androidapp.MyItemizedOverlay;
+import edu.jhu.cs.oose.project.group14.ihungry.androidapp.MyLocation;
+import edu.jhu.cs.oose.project.group14.ihungry.androidapp.MyOverlayItem;
 import edu.jhu.cs.oose.project.group14.ihungry.androidapp.MyLocation.*;
 import edu.jhu.cs.oose.project.group14.ihungry.androidclientmodel.*;
 

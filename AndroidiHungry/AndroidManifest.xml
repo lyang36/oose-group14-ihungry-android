@@ -24,7 +24,7 @@
         <uses-library android:name="android.test.runner" />
 
         <activity
-            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.ActivityController"
+            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities.ActivityController"
             android:label="@string/title_activity_controller" >
             android:configChanges="orientation"
     		android:screenOrientation="portrait"
@@ -47,49 +47,49 @@
         -->
 
         <activity
-            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.MainScreenActivity"
+            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities.MainScreenActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_mainscreen"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.NearbyActivity"
+            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities.NearbyActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_nearby"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.AboutmeActivity"
+            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities.AboutmeActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_aboutme"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.LoginActivity"
+            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities.LoginActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.OrderandRestaurantInfoActivity"
+            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities.OrderandRestaurantInfoActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_orderand_restaurant_info"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.SignupActivity"
+            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities.SignupActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_signup"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.FavouritesActivity"
+            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities.FavouritesActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_favourites"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.OrderHistoryActivity"
+            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities.OrderHistoryActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_order_history"
             android:screenOrientation="portrait" >
