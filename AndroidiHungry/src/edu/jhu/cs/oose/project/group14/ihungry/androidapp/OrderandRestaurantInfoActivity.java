@@ -48,6 +48,7 @@ public class OrderandRestaurantInfoActivity extends Activity {
 	private ListView m_ListView;
 	
 	private MyListViewAdapter list_adapter;
+	private ArrayList<ListMenuItem> menu_t;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -73,15 +74,15 @@ public class OrderandRestaurantInfoActivity extends Activity {
 //		m_ListView.setAdapter(new ArrayAdapter<String>(this,R.layout.list_item_simple, R.id.title, menu_info2));
 //		list_adapter = new MyListViewAdapter(this, menu_info2);
 		
-		ListMenuItem item1 = new ListMenuItem("Chicken with Broccoli", 4.0, 4.5);
-		ListMenuItem item2 = new ListMenuItem("Assorted Mixed Vegetable", 4.4, 4.65);
-		ListMenuItem item3 = new ListMenuItem("Shrimp with Lobster Sauce", 4.3, 4.95);
-		ListMenuItem item4 = new ListMenuItem("Chicken with Cashew Nuts", 4.1, 5.05);
-		ListMenuItem item5 = new ListMenuItem("B-B-Q Spare Ribs", 3.95, 5.25);
-		ListMenuItem item6 = new ListMenuItem("Skewered Beef", 4.8, 4.5);
-		ListMenuItem item7 = new ListMenuItem("Wonton Soup", 4.5, 1.5);
-		ListMenuItem item8 = new ListMenuItem("House Special Soup", 4.7, 5.50);
-		ArrayList<ListMenuItem> menu_t = new ArrayList<ListMenuItem>();
+		ListMenuItem item1 = new ListMenuItem("Chicken with Broccoli", 4.0, 4.5, 0);
+		ListMenuItem item2 = new ListMenuItem("Assorted Mixed Vegetable", 4.4, 4.65, 0);
+		ListMenuItem item3 = new ListMenuItem("Shrimp with Lobster Sauce", 4.3, 4.95, 0);
+		ListMenuItem item4 = new ListMenuItem("Chicken with Cashew Nuts", 4.1, 5.05, 0);
+		ListMenuItem item5 = new ListMenuItem("B-B-Q Spare Ribs", 3.95, 5.25, 0);
+		ListMenuItem item6 = new ListMenuItem("Skewered Beef", 4.8, 4.5, 0);
+		ListMenuItem item7 = new ListMenuItem("Wonton Soup", 4.5, 1.5, 0);
+		ListMenuItem item8 = new ListMenuItem("House Special Soup", 4.7, 5.50, 0);
+		menu_t = new ArrayList<ListMenuItem>();
 		menu_t.add(item1);
 		menu_t.add(item2);
 		menu_t.add(item3);
@@ -110,9 +111,12 @@ public class OrderandRestaurantInfoActivity extends Activity {
 				long id) {
 			
 			ListMenuItem clickItem = (ListMenuItem) list_adapter.getItem(position);
-			clickItem.setPrice(999);
-			list_adapter.notifyDataSetChanged();
+		//	clickItem.setPrice(999);
+		//	list_adapter.notifyDataSetChanged();
 			
+			for(int i=0; i<menu_t.size(); i++){
+				Log.v("[Item price]",((ListMenuItem)menu_t.get(i)).getQuantity()+"");
+			}
 			
 			
 	/*		

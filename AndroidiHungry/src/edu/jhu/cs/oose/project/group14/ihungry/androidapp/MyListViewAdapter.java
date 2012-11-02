@@ -19,6 +19,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
+/**
+ * A customized ListViewAdapter for showing items on the list. It handles two buttons(+ -) clicking event.
+ * @author SuNFloWer
+ *
+ */
 public class MyListViewAdapter extends BaseAdapter {
 /*
 	static class ViewHolder{
@@ -41,7 +46,9 @@ public class MyListViewAdapter extends BaseAdapter {
 	private TextView rating;
 	private TextView price;
 	private ImageView thumb_image;
-	private Button btn_quantity;
+	private TextView quantity;
+	private Button btn_add;
+	private Button btn_minus;
 	private ArrayList<ListMenuItem> menu_items; 
 	
 
@@ -94,13 +101,42 @@ public class MyListViewAdapter extends BaseAdapter {
 		rating = (TextView) vi.findViewById(R.id.rating); // rating
 		price = (TextView) vi.findViewById(R.id.price); // price
 		thumb_image = (ImageView) vi.findViewById(R.id.list_image); // thumb
-		btn_quantity = (Button) vi.findViewById(R.id.btn_quantity); // quantity
+		quantity = (TextView) vi.findViewById(R.id.quantity); // quantity
+		btn_add = (Button) vi.findViewById(R.id.btn_add); // quantity +
+		btn_minus = (Button) vi.findViewById(R.id.btn_minus); // quantity -
 		
 		//title.setText(info[position]);
 		ListMenuItem m_item = (ListMenuItem)menu_items.get(position);
 		title.setText(m_item.title);
-		rating.setText(m_item.rating+"");
-		price.setText(m_item.price+"");
+		rating.setText("Rating "+m_item.rating);
+		price.setText("Price "+m_item.price);
+		quantity.setText("Quantity "+m_item.quantity);
+		
+		btn_add.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				ListView mListView = (ListView) v.getParent().getParent();
+				final int pos = mListView.getPositionForView((View) v.getParent());
+				ListMenuItem clickItem = (ListMenuItem) mListView.getAdapter().getItem(pos);
+			//	clickItem.setPrice(888);
+				clickItem.addQuantity(1);
+				((BaseAdapter) mListView.getAdapter()).notifyDataSetChanged();
+				
+	
+			}
+		});	
+		
+		btn_minus.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				ListView mListView = (ListView) v.getParent().getParent();
+				final int pos = mListView.getPositionForView((View) v.getParent());
+				ListMenuItem clickItem = (ListMenuItem) mListView.getAdapter().getItem(pos);
+			//	clickItem.setPrice(888);
+				clickItem.minusQuantity(1);
+				((BaseAdapter) mListView.getAdapter()).notifyDataSetChanged();
+				
+	
+			}
+		});	
 				
 		/*	View vi = convertView;
 		final ViewHolder holder;
