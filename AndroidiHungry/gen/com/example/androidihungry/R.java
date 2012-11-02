@@ -81,10 +81,11 @@ public final class R {
         public static final int activity_mainscreen=0x7f030003;
         public static final int activity_nearby=0x7f030004;
         public static final int activity_order_history=0x7f030005;
-        public static final int activity_orderand_restaurant_info=0x7f030006;
-        public static final int activity_signup=0x7f030007;
-        public static final int balloon_overlay=0x7f030008;
-        public static final int list_item_simple=0x7f030009;
+        public static final int activity_order_review=0x7f030006;
+        public static final int activity_orderand_restaurant_info=0x7f030007;
+        public static final int activity_signup=0x7f030008;
+        public static final int balloon_overlay=0x7f030009;
+        public static final int list_item_simple=0x7f03000a;
     }
     public static final class menu {
         public static final int activity_aboutme=0x7f070000;
@@ -93,9 +94,10 @@ public final class R {
         public static final int activity_login=0x7f070003;
         public static final int activity_nearby=0x7f070004;
         public static final int activity_order_history=0x7f070005;
-        public static final int activity_orderand_restaurant_info=0x7f070006;
-        public static final int activity_signin=0x7f070007;
-        public static final int activity_signup=0x7f070008;
+        public static final int activity_order_review=0x7f070006;
+        public static final int activity_orderand_restaurant_info=0x7f070007;
+        public static final int activity_signin=0x7f070008;
+        public static final int activity_signup=0x7f070009;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
@@ -111,6 +113,7 @@ public final class R {
         public static final int title_activity_mainscreen=0x7f050004;
         public static final int title_activity_nearby=0x7f050005;
         public static final int title_activity_order_history=0x7f05000f;
+        public static final int title_activity_order_review=0x7f050010;
         public static final int title_activity_orderand_restaurant_info=0x7f05000c;
         public static final int title_activity_signin=0x7f05000a;
         public static final int title_activity_signup=0x7f05000d;

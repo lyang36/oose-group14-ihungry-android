@@ -94,6 +94,12 @@
             android:label="@string/title_activity_order_history"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="edu.jhu.cs.oose.project.group14.ihungry.androidapp.activities.OrderReviewActivity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_order_review"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

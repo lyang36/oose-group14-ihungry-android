@@ -13,6 +13,7 @@ import edu.jhu.cs.oose.project.group14.ihungry.androidapp.MyListViewAdapter;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -118,13 +119,22 @@ public class OrderandRestaurantInfoActivity extends Activity {
 	OnClickListener bt_reviewItem_Listener = new OnClickListener() {
 		public void onClick(View v) {
 			for (int i = 0; i < menu_t.size(); i++) {
-				Log.v("[Item quantity]",
-						((ListMenuItem) menu_t.get(i)).getQuantity() + "");
+				ListMenuItem item_t = (ListMenuItem)menu_t.get(i);
+				Log.v("[Order]",
+						item_t.getTitle()+" "+item_t.getQuantity() + "");
 			}
-		//	finish();
-		
-		
-		
+			Intent intent = new Intent(OrderandRestaurantInfoActivity.this, OrderReviewActivity.class);
+			/*
+			 * Send the order object as JSON to the next activity.
+			 */
+			
+			
+			
+			
+			OrderandRestaurantInfoActivity.this.startActivity(intent);
+			
+			
+			
 		}
 	};
 

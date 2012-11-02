@@ -16,5 +16,6 @@
     <string name="title_activity_signup">SignupActivity</string>
     <string name="title_activity_favourites">FavouritesActivity</string>
     <string name="title_activity_order_history">OrderHistoryActivity</string>
+    <string name="title_activity_order_review">OrderReviewActivity</string>
 
 </resources>
