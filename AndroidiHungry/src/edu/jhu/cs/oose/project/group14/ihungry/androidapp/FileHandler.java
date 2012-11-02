@@ -7,6 +7,11 @@ import java.io.FileOutputStream;
 import android.content.Context;
 import android.util.Log;
 
+/**
+ * This class handles reading from and writing to the file.
+ * @author SuNFloWer
+ *
+ */
 public class FileHandler {
 	public static String f_userinfo = "userinfo.txt";
 	public static String f_rest_location_cache = "restLocationCache.txt";

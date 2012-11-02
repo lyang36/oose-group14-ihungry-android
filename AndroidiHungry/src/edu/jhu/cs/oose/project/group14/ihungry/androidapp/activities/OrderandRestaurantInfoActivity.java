@@ -131,23 +131,31 @@ public class OrderandRestaurantInfoActivity extends Activity {
 			
 			
 			
-			OrderandRestaurantInfoActivity.this.startActivity(intent);
+			OrderandRestaurantInfoActivity.this.startActivityForResult(intent, ActivitySwitchSignals.ORDERREVIEW);
 			
 			
 			
 		}
 	};
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if(resultCode == ActivitySwitchSignals.ORDERREVIEWCLOSESWH){
+		//	setResult(ActivitySwitchSignals.RESTAURANTINFOCLOSESWH);
+			this.finish();
+		}
+	}
 
 	/**
-	 * A call-back for when the user tap on a single row of the list.
+	 * A call-back for when the user tap on a single row of the list => nothing should happen.
 	 */
 	OnItemClickListener m_ListViewOnItemClickListener = new OnItemClickListener() {
 
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 
-			ListMenuItem clickItem = (ListMenuItem) list_adapter
-					.getItem(position);
+			ListMenuItem clickItem = (ListMenuItem) list_adapter.getItem(position);
 			// clickItem.setPrice(999);
 			// list_adapter.notifyDataSetChanged();
 

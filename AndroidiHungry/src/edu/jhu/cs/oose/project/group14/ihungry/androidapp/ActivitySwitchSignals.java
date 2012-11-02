@@ -14,6 +14,10 @@ public class ActivitySwitchSignals {
 	
 	static final public int LOGIN = 106;
 	
+	static final public int ORDERREVIEW = 107;
+	static final public int RESTAURANTINFO = 108;
+	
+	
 	
 	
 	static final public int QUIT = 1000;
@@ -24,5 +28,10 @@ public class ActivitySwitchSignals {
 	static final public int ORDERHISTORYSWH = 1005;
 
 	static final public int LOGINSWH = 1006;
+	
+	static final public int ORDERREVIEWCLOSESWH = 1007;
+	static final public int RESTAURANTINFOCLOSESWH = 1008;
+
+	
 
 }

@@ -2,6 +2,7 @@ package edu.jhu.cs.oose.project.group14.ihungry.androidapp;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -77,9 +78,21 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<MyOverlayItem> {
 			intent.putExtra("rest_addr", rest_addr);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			c.startActivity(intent);
+		//	c.startActivityForResult(intent, ActivitySwitchSignals.RESTAURANTINFO);
+		//	((Activity) c).startActivityForResult(intent, ActivitySwitchSignals.RESTAURANTINFO);
+
 		}
 		return true;
 	}
+	/*
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if(resultCode == ActivitySwitchSignals.RESTAURANTINFOCLOSESWH){
+			this.finish();
+		}
+	}
+	*/
 
 	/**
 	 * Reconstruct a BalloonOverlayView with a customized offset.
